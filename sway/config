@@ -1,0 +1,232 @@
+set $mod Mod1
+set $term wezterm
+
+hide_edge_borders both
+default_border none
+gaps outer 2
+gaps inner 10
+
+# output
+set $display DP-1
+output "*" bg ~/Pictures/Wallpapers/cosmos-3440x1440.jpg fill
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:DejaVu Sans Mono For Powerline 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+mode "Passthrough Mode - Press Alt+F12 to exit" {
+    bindsym $mod+F12 mode "default"
+}
+bindsym $mod+F12 mode "Passthrough Mode - Press Alt+F12 to exit"
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+v split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# With icons
+set $ws1 "1  "
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 "
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
+
+workspace $ws1 output $display
+workspace $ws2 output $display
+workspace $ws3 output $display
+workspace $ws4 output $display
+workspace $ws5 output $display
+workspace $ws6 output $display
+workspace $ws7 output $display
+workspace $ws8 output $display
+workspace $ws9 output $display
+workspace $ws10 output $display
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# lock sway
+bindsym $mod+Shift+x exec swaylock --ignore-empty-password --show-failed-attempts --disable-caps-lock-text --image ~/Pictures/wallpapers/cosmos-3440x1440.jpg --inside-color 6699cc --ring-color 66cccc
+
+# resize
+bindsym $mod+Shift+y resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+u resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+i resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+o resize grow width 10 px or 10 ppt
+
+# disable focus on hover
+focus_follows_mouse no
+
+# screenshot
+bindsym Print exec grimshot --notify save
+bindsym $mod+Print exec grimshot --notify save area
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+
+# Sreen brightness controls
+# bindsym XF86MonBrightnessUp exec sudo xbacklight -inc 10 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec sudo xbacklight -dec 10 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+input "type:keyboard" {
+    xkb_layout us,ru,se
+    xkb_options grp:lwin_toggle
+}
+
+bindsym $mod+r exec wezterm start --class="launcher" bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'
+for_window [app_id="launcher"] floating enable, border none, opacity 1.0
+
+# python floating window
+for_window [app_id="python"] floating enable
+for_window [app_id="python"] resize set 1024 576
+for_window [app_id="python"] move position 40 40
+for_window [app_id="python"] move scratchpad
+for_window [app_id="python"] border pixel 5
+exec --no-startup-id wezterm start --class="python" python
+bindsym F1 [app_id="python"] scratchpad show
+
+# terminal floating window
+for_window [app_id="dropdown"] floating enable
+for_window [app_id="dropdown"] resize set 1024 576
+for_window [app_id="dropdown"] move position 40 40
+for_window [app_id="dropdown"] move scratchpad
+for_window [app_id="dropdown"] border pixel 5
+exec --no-startup-id wezterm start --class="dropdown" bash
+bindsym F2 [app_id="dropdown"] scratchpad show
+
+# applications
+exec --no-startup-id swaymsg 'workspace $ws3; exec firefox'
+assign [app_id="firefox"] $ws3
+assign [app_id="telegramdesktop"] $ws4
+exec --no-startup-id telegram-desktop
+exec mako
+
+# colors
+set $bg-color 	         #99cc99
+set $fg-color            #282828
+set $inactive-bg-color   #484848
+set $inactive-fg-color   #f99157
+set $urgent-bg-color     #ffcc66
+set $urgent-fg-color     #282828
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Adwaita:dark'
+}
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $fg-color            #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-fg-color   #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-fg-color   #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-fg-color     #00ff00
+
+bar {
+    font pango:Noto Mono for Powerline, FontAwesome 5 Free
+    position bottom
+    tray_output $display
+    status_command i3status-rs ~/.config/sway/status.toml
+
+    colors {
+        background #1d1d1d
+        statusline #d8d5cc
+        separator  #666666
+
+        #                  border       background   text
+        focused_workspace  #4c7899      #336699      #d8d5cc
+        active_workspace   #333333      #5f676a      #d8d5cc
+        inactive_workspace #333333      #282828      #d8d5cc
+        urgent_workspace   #2f343a      #ffcc66      #282828
+        binding_mode       #2f343a      #bb9933      #d8d5cc
+    }
+}

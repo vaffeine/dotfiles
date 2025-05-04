@@ -1,0 +1,58 @@
+[theme]
+theme = "modern"
+
+[icons]
+icons = "awesome5"
+
+[[block]]
+block = "music"
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+interval = 60
+warning = 10.0
+alert = 5.0
+
+[[block]]
+block = "disk_space"
+path = "/home"
+info_type = "available"
+interval = 60
+warning = 10.0
+alert = 5.0
+
+[[block]]
+block = "pacman"
+interval = 600
+format = "{pacman}"
+format_singular = "{pacman}"
+format_up_to_date = "UTD"
+critical_updates_regex = "(linux|linux-lts|linux-zen)"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "memory"
+format = "$icon $mem_used_percents"
+interval = 5
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "time"
+interval = 60
+
+[[block]]
+block = "keyboard_layout"
+driver = "xkbswitch"
+interval = 1
+format = "$layout"
+
+[block.mappings]
+"English (US)" = "EN"
+"Russian (N/A)" = "RU"
