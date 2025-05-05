@@ -2,7 +2,7 @@ set $mod Mod1
 set $term wezterm
 
 hide_edge_borders both
-default_border none
+default_border normal
 gaps outer 2
 gaps inner 10
 
@@ -206,13 +206,13 @@ exec_always {
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $fg-color            #00ff00
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-fg-color   #00ff00
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-fg-color   #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-fg-color     #00ff00
+client.focused          $bg-color           $bg-color          $fg-color            #444444
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-fg-color   #444444
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-fg-color   #444444
+client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-fg-color     #444444
 
 bar {
-    font pango:Noto Mono for Powerline, FontAwesome 5 Free
+    font pango:NotoMono Nerd Font
     position bottom
     tray_output $display
     status_command i3status-rs ~/.config/sway/status.toml
@@ -222,11 +222,11 @@ bar {
         statusline #d8d5cc
         separator  #666666
 
-        #                  border       background   text
-        focused_workspace  #4c7899      #336699      #d8d5cc
-        active_workspace   #333333      #5f676a      #d8d5cc
-        inactive_workspace #333333      #282828      #d8d5cc
-        urgent_workspace   #2f343a      #ffcc66      #282828
-        binding_mode       #2f343a      #bb9933      #d8d5cc
+        #                  border                  background              text
+        focused_workspace  $bg-color               $bg-color               $fg-color
+        active_workspace   $inactive-bg-color      $inactive-bg-color      #78755c
+        inactive_workspace $inactive-bg-color      $inactive-bg-color      #88755c
+        urgent_workspace   #2f343a                 #ffcc66                 #282828
+        binding_mode       #2f343a                 #bb9933                 #d8d5cc
     }
 }
