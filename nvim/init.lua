@@ -1,5 +1,6 @@
 vim.opt.background = "dark"
 vim.wo.number = true
+vim.o.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 vim.opt.smartindent = true

@@ -14,7 +14,10 @@ return {
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
+			local colors = require('ayu.colors')
+			colors.generate()
 			require("ayu").setup({
+				mirage = false,
 				terminal = true,
 				overrides = {
 					Normal = { bg = "None" },
@@ -26,9 +29,11 @@ return {
 					CursorLine = { bg = "None" },
 					CursorColumn = { bg = "None" },
 					VertSplit = { bg = "None" },
+					LineNr = { fg = colors.fg_idle },
+					CursorLineNr = { bg = "None" },
 				},
 			})
-			vim.cmd("colorscheme ayu")
+			require('ayu').colorscheme()
 		end,
 	},
 	{
