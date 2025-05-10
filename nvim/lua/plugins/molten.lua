@@ -32,6 +32,8 @@ return {
 				{ silent = true, desc = "close output window" })
 			vim.keymap.set("n", "<leader>md", ":MoltenDelete<CR>",
 				{ silent = true, desc = "delete Molten cell" })
+			vim.keymap.set("n", "<leader>ip", ":MoltenImagePopup<CR>",
+				{ silent = true, desc = "open image in a separate window" })
 
 			vim.g.molten_wrap_output = true
 			vim.g.molten_virt_text_output = true
